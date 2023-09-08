@@ -1,10 +1,13 @@
 from flask import Flask, render_template, redirect, request
+from app.util.Bd_Factory import Data_Base
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('home.html', apelido='apelido')
+    db = Data_Base()
+    res = db.pegar_estado()
+    return render_template('home.html', apelido=res)
 
 @app.route('/login')
 def login():
@@ -15,3 +18,4 @@ def verifica():
     apelido = request.form['apelido']
     print(apelido)
     return redirect('/')
+
