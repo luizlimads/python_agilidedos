@@ -21,12 +21,10 @@ class Data_Base:
             password=os.environ["password_db"],
             database=os.environ["database"]
         )
-        print(os.environ["user_db"])
-    
+ 
     def __fechar_conn(self):
         self.__conn.commit()
-        self.__conn.close()
-        
+        self.__conn.close()        
 
     def pegar_estado(self):
         self.__abrir_conn()

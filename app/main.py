@@ -16,6 +16,7 @@ def login():
 @app.route('/verifica', methods=['POST',])
 def verifica():
     apelido = request.form['apelido']
+    senha = request.form['senha']
     print(apelido)
     return redirect('/')
 
