@@ -4,7 +4,7 @@
         <div class="m-0 p-0 pt-3 card w-25">
             <h3 class="text-center p-3 pb-5">Entrar</h3>
             <div class="card-body">
-                <form action="/verifica" method="POST">
+                <form action="{{ url_for('users.verifica_login') }}" method="POST">
                     <div class="login form-group">
                         <div class="input-group">
                             <span class="input-group-addon pl-2 pr-3"><i class="fa fa-user"></i></span>
@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Ir</button>
                     </div>
                   </form> 
-                  <footer class="blockquote-footer">Sem cadastro? <a href="" data-toggle="modal" data-target="#exampleModal">Cadastre-se</a></footer>  
+                  <footer class="blockquote-footer">Sem cadastro? <a href="{{ url_for('users.registro') }}">Cadastre-se</a></footer>  
             </div>
         </div>
     </div>

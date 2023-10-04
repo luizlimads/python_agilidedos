@@ -1,22 +1,18 @@
-from flask import Flask, render_template, redirect, request
-from app.util.Bd_Factory import Data_Base
+import os
+from flask import Flask, render_template, redirect, url_for
+from app.routes.users_bp import users_bp
 
 app = Flask(__name__)
+SECRET_KEY = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = SECRET_KEY
+
+# Registre o Blueprint de rotas de usuários
+app.register_blueprint(users_bp, url_prefix='')
 
 @app.route('/')
 def index():
-    db = Data_Base()
-    res = db.pegar_estado()
-    return render_template('home.html', apelido=res)
+    return redirect(url_for('users.login'))
+    return render_template('home.html', res='aa')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/verifica', methods=['POST',])
-def verifica():
-    apelido = request.form['apelido']
-    senha = request.form['senha']
-    print(apelido)
-    return redirect('/')
-
+if __name__ == '__main__':
+    app.run()
