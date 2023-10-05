@@ -14,7 +14,7 @@
                     <div class="login form-group">
                         <div class="input-group">
                             <span class="input-group-addon pl-2 pr-3"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" name="apelido" placeholder="Apelido" required="required">
+                            <input type="text" class="form-control" name="login" placeholder="Login" required="required">
                         </div>
                     </div>
                     <div class="login form-group">
@@ -35,6 +35,13 @@
                             <input type="password" class="form-control" name="repetir_senha" placeholder="Repita a Senha" required="required">
                         </div>
                     </div>
+
+                    {% for message in get_flashed_messages() %}
+                        <div class="alert alert-danger" role="alert">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+
                     <div class="form-group pl-2 pr-1">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Ir</button>
                     </div>

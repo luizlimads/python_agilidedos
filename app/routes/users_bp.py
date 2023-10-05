@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash
+from app.service.User_Controller import User_Controller
+
 
 users_bp = Blueprint('users', __name__)
 
@@ -16,11 +18,16 @@ def registro():
 
 @users_bp.route('/register', methods=['POST'])
 def faz_registro():
-    data = {chave: request.form[chave] for chave in request.form}
     try:
-        pass
-    except Exception as e:
-        flash("Falha em salvar os dados")
-        print("Houve um erro:", e)
+        data = {
+            "name":request.form['nome'],
+            "login":request.form['login'],
+            "email":request.form['email'],
+            "password":request.form['senha']
+        }
+        user = User_Controller(**data)
+        user.register()
+    except:
+        return redirect(url_for('users.registro'))
     return redirect(url_for('users.login'))
 
