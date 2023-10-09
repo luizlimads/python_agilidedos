@@ -17,6 +17,13 @@
                             <input type="password" class="form-control" name="senha" placeholder="Senha" required="required">
                         </div>
                     </div>
+
+                    {% for message in get_flashed_messages() %}
+                    <div class="alert alert-success" role="alert">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+
                     <div class="form-group pl-2 pr-1">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Ir</button>
                     </div>
