@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash
-from app.service.User_Controller import User_Controller
+
+from app.DAO.User_dao import User_Dao
 from app.model.user import User
 
 users_bp = Blueprint('users', __name__)
@@ -22,17 +23,23 @@ def catch_form_user(*args):
 def login():
     return render_template('login/login.html')
 
-
 @users_bp.route('/login', methods=['POST'])
 def verifica_login():
     try:
         data = catch_form_user('login','senha')
         user = User(**data)
-        user_controller = User_Controller(user)
-        user_controller.login()
+        is_valid_user = User_Dao.valid_user(user)
+        
+        if is_valid_user:
+            return redirect(url_for('game.play'))
+        else:
+            flash("Senha ou usuário invalidos")
+            return redirect(url_for('users.login'))
+        
     except Exception as e:
-        return redirect(url_for('users.login'))
-    return redirect(url_for('users.login'))
+            flash("Um comportamento inesperado ocorreu")
+            print(e)
+            return redirect(url_for('users.login'))
 
 
 @users_bp.route('/register')
@@ -44,10 +51,12 @@ def faz_registro():
     try:
         data = catch_form_user('nome','login','email','senha')
         user = User(**data)
-        user_controller = User_Controller(user)
-        user_controller.register()
+        User_Dao.register_user(user)
+        flash("Usuário criado com sucesso")
+        return redirect(url_for('users.login'))
     except Exception as e:
-        return redirect(url_for('users.registro'))
+        flash("Houve uma falha no seu registro, tende novamente")
+        print(e)
+        return redirect(url_for('users.register'))
     
-    return redirect(url_for('users.login'))
 

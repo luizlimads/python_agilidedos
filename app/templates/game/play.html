@@ -1,0 +1,45 @@
+{% extends '_base.html' %}
+{% block content %}
+
+
+<section class="text-center h-100">  
+
+  <div class="show-words">
+    <p class="">texto para digitars</p>
+    <div class="d-inline">
+      <div id="next-word"></div>
+      <div id="current-word"></div>
+    </div>
+  </div>
+
+  <div class="">
+    <input type="text" class="form-control"  id="inputText" cols="30" rows="1"></input>
+  </div>
+
+  <div class="statics">
+    <div class="d-inline pr-5">
+      <p class="d-inline">palavras sem erros: </p><span></span>
+    </div>
+    <div class="d-inline pr-5">
+      <p class="d-inline">estimativa tempo restante: </p><span></span>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary mb-4">Primary</button>
+
+  <div id="outputText" class="container border">
+    <div class="row">
+      <div class="col-sm-8">
+        <span>esse é um texto de exemplo</span>
+      </div>
+      <div class="col-sm-2">
+        <span>acertos: </span><span>15</span>
+      </div>
+      <div class="col-sm-2">
+        <span>erros: </span><span>10</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock %}

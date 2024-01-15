@@ -1,7 +1,9 @@
-from hashlib import sha256
 import os
+import json
 
+from hashlib import sha256
 from dotenv import load_dotenv
+
 load_dotenv()
 
 class User:
@@ -22,7 +24,10 @@ class User:
         password_salt = str(salt+'@'+password)
         hash_password = sha256(password_salt.encode())
         return hash_password.hexdigest()
-        
+    
+    def to_json(self):
+        user_dict = {key: value for key, value in self.__dict__.items() if value is not None}
+        return json.dumps(user_dict, indent=4)
 
     def __str__(self):
         return (f'{self.name} {self.login} {self.password} {self.email}')

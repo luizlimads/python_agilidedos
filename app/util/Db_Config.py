@@ -11,8 +11,7 @@ class Data_Base:
         try:
             if not self.conn:
                 self.conn = mysql.connector.connect(
-                    host="db4free.net",
-                    # host="localhost",
+                    host = os.environ["host_db"],
                     user=os.environ["user_db"],
                     password=os.environ["password_db"],
                     database=os.environ["database"],
