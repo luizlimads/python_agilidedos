@@ -8,7 +8,7 @@ from app.routes.game_bp import game_bp
 
 
 
-load_dotenv()
+
 def create_app(config = None):
     app = Flask(__name__)
     SECRET_KEY = os.environ["secret_key"]

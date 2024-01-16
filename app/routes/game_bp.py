@@ -2,6 +2,9 @@ import math
 
 from flask import Blueprint, render_template, request, jsonify
 
+from app.service.Auth import token_required
+from app.model.user import User
+
 game_bp = Blueprint('game', __name__, url_prefix="/game")
 
 def match_char(text_one, text_two):
@@ -11,13 +14,14 @@ def match_char(text_one, text_two):
         number_of_hits += 1 if char == text_two[indice] else 0
     return number_of_hits
 
-
 @game_bp.route('/')
-def menu():
-    return render_template('game/menu.html')
+@token_required
+def menu(user_data: User,*args, **kwargs):
+    return render_template('game/menu.html', user_name = user_data.name)
 
 @game_bp.route('/play')
-def play():
+@token_required
+def play(user_data: User):
     texto_de_aprendizado_completo = "banana batata jaca laranja"
     return render_template('game/play.html', texto_de_aprendizado=texto_de_aprendizado_completo)
 
