@@ -7,12 +7,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class User:
+    id: int
     name:str
     login:str
     password:str
     email:str
 
-    def __init__(self, name = None, login = None, password = None, email = None,*args, **kwargs):
+    def __init__(self, id = None, name = None, login = None, password = None, email = None,*args, **kwargs):
         self.name = name
         self.login = login
         self.password = self.hashed_password(password) if password else None

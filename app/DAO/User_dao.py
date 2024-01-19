@@ -16,9 +16,14 @@ class User_Dao():
         data = None
 
         for row in cursor:
-            data = User(name=row[1],
+            user_id = row[0]
+            data = User(id = user_id,
+                name=row[1],
                         login=row[2])
             is_valid_user = True
+            sql = "INSERT INTO access (user_id) VALUES (%s);"
+            values = (user_id,)
+            cursor.execute(sql,values)
 
         def_res = Default_Response(is_valid_user, data)
 

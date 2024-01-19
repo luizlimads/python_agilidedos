@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, request, jsonify
 
 from app.service.Auth import token_required
 from app.model.user import User
+from app.DAO.Words_dao import Words_Dao
 
 game_bp = Blueprint('game', __name__, url_prefix="/game")
 
@@ -16,8 +17,17 @@ def match_char(text_one, text_two):
 
 @game_bp.route('/')
 @token_required
-def menu(user_data: User,*args, **kwargs):
-    return render_template('game/menu.html', user_name = user_data.name)
+def menu(user_data: User):
+    words = Words_Dao.get_words()
+    words_data = words.data
+    return render_template('game/menu.html', user = user_data, words = words_data)
+
+@game_bp.route('/get-words')
+@token_required
+def get_words(user_data: User):
+    dados_do_banco = [{'nome': 'Exemplo', 'idade': 25}, {'nome': 'Outro', 'idade': 30}]
+    # Retorne os dados como JSON
+    return jsonify(dados_do_banco)
 
 @game_bp.route('/play')
 @token_required

@@ -1,16 +1,17 @@
 {% extends '_base.html' %}
 {% block content %}
+<script src="{{ url_for('static', filename='js/menu_script.js') }}"></script>
 
 <div class="container-fluid h-100 d-flex align-items-center justify-content-center">
     
     <div class="d-flex flex-column">
         <div class="text-center mb-5">
             <p class="h2 p-0 m-0">Bem vindo</p>
-            <span class="h2">{{user_name}}</span>
+            <span class="h2">{{user.name}}</span>
         </div>
     
         <div class="mt-5">
-            <button>Iniciar novo Jogo</button>
+            <button id="btn_new_game" data-toggle="modal" data-target="#modal_new_game">Iniciar novo Jogo</button>
             <button>Minhas estatisticas</button>
             <button>Meus desafios</button>
         </div>
@@ -18,4 +19,7 @@
     </div>
 
 </div>
+
+{% include "game/modal_new_game.html" %}
+
 {% endblock %}

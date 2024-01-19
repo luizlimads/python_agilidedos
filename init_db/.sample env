@@ -1,0 +1,6 @@
+host_db = your_host
+user_db = your_user
+password_db = your_password_user
+database = your_database
+secret_key = your_secret_key
+salt = your_salt

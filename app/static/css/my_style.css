@@ -17,3 +17,7 @@ body{
 .largura-100{
     width: 100vw;
 }
+
+.pintar {
+    background-color: blue;
+}
