@@ -10,7 +10,6 @@ def execute(sql_commands):
         try:
             print(command)
             cursor.execute(command)
-            conn.commit()
         except mysql.connector.Error as err:
             if err.errno == 1065:
                 # erro linhas em branco
@@ -21,12 +20,12 @@ def execute(sql_commands):
 
 
 def create_tables():
-        with open("init_db/create_tables.sql", "r") as file:
+        with open("init_db/create_tables.sql", "r", encoding="UTF-8") as file:
             sql_commands = file.read()
         execute(sql_commands)
 
 def fill_tables():
-    with open("init_db/fill_tables.sql", "r") as file:
+    with open("init_db/fill_tables.sql", "r", encoding="UTF-8") as file:
         sql_commands = file.read() 
     execute(sql_commands)
 

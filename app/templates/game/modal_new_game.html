@@ -13,7 +13,10 @@
                       <div class="col-6">
                         <h6>Escolha do editor</h5>
                         {% for word in words %}
-                          <button>{{ word.name }}</button>
+                        <form action="{{ url_for('game.new_game') }}" method="POST">
+                          <input name="id" type="hidden" value="{{ word.id }}">
+                          <button type="submit" formmethod="post">{{ word.name }}</button>
+                        </form>
                         {% endfor %}
                       </div>
                       <div class="col-6">

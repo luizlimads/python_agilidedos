@@ -4,7 +4,7 @@ import datetime
 from flask import Blueprint, render_template, redirect, request, url_for, flash, make_response
 
 from app.DAO.User_dao import User_Dao
-from app.model.user import User
+from app.model.User import User
 from app.service.Auth import generate_token, parametros_auth
 
 users_bp = Blueprint('users', __name__)

@@ -1,6 +1,6 @@
 import json
 
-from app.model.user import User
+from app.model.User import User
 
 class TestLogin:
 	

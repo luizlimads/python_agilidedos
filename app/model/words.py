@@ -1,8 +1,15 @@
 class Words:
-    def __init__(self, user_id, name, value):
+    id: int
+    user_id: int 
+    name: str
+    value: str
+
+    def __init__(self, id = None, user_id = None, name = None, value = None):
+        self.id = id
         self.user_id = user_id
         self.name = name
         self.value = value
 
     def __str__(self):
-        return f'{self.user_id} {self.name}'
+        attributes = vars(self)
+        return ' '.join([f'{key}={value}' for key, value in attributes.items()])

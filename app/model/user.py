@@ -14,6 +14,7 @@ class User:
     email:str
 
     def __init__(self, id = None, name = None, login = None, password = None, email = None,*args, **kwargs):
+        self.id = id
         self.name = name
         self.login = login
         self.password = self.hashed_password(password) if password else None
@@ -66,4 +67,5 @@ class User:
         return json.dumps(user_dict, indent=4)
 
     def __str__(self):
-        return (f'{self.name} {self.login} {self.password} {self.email}')
+        attributes = vars(self)
+        return ' '.join([f'{key}={value}' for key, value in attributes.items()])

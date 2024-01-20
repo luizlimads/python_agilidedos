@@ -1,6 +1,6 @@
 from app.util.Db_Config import Data_Base
-from app.model.user import User
-from app.model.response import Default_Response
+from app.model.User import User
+from app.model.Response import Default_Response
 
 class User_Dao():
 
@@ -18,7 +18,7 @@ class User_Dao():
         for row in cursor:
             user_id = row[0]
             data = User(id = user_id,
-                name=row[1],
+                        name=row[1],
                         login=row[2])
             is_valid_user = True
             sql = "INSERT INTO access (user_id) VALUES (%s);"
