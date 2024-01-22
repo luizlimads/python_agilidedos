@@ -1,5 +1,11 @@
+DROP TABLE IF EXISTS game_details;
 DROP TABLE IF EXISTS access;
+
+ALTER TABLE game_details DROP FOREIGN KEY game_details_ibfk_1;
+ALTER TABLE game_details DROP FOREIGN KEY game_details_ibfk_2;
+
 DROP TABLE IF EXISTS game;
+
 DROP TABLE IF EXISTS set_words;
 DROP TABLE IF EXISTS users;
 
@@ -46,5 +52,20 @@ CREATE TABLE IF NOT EXISTS game(
         ON DELETE CASCADE,
     FOREIGN KEY (word_id)
         REFERENCES set_words(id)
+        ON DELETE CASCADE
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS game_details(
+    game_id INT NOT NULL,
+    user_id INT NOT NULL,
+    line INT,
+    hits INT,
+    miss INT,
+    time BIGINT,
+    FOREIGN KEY (game_id)
+        REFERENCES game(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id)
+        REFERENCES users(id)
         ON DELETE CASCADE
 ) ENGINE=INNODB;

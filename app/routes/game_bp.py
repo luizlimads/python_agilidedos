@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 
 from app.service.Auth import token_required
 from app.model.Game import Game
+from app.model.Game_Details import Game_Details
 from app.model.User import User
 from app.model.Words import Words
 from app.DAO.Words_dao import Words_Dao
@@ -33,7 +34,6 @@ def new_game(user_data: User):
     game_id = res.data['game_id']
     return redirect(url_for('game.play', no_game=f'{user_id}-{game_id}'))
 
-
 @game_bp.route('/play/<no_game>')
 @token_required
 def play(user_data: User,no_game: str):
@@ -48,10 +48,22 @@ def play(user_data: User,no_game: str):
 
 
 @game_bp.route('/update_text', methods=['POST'])
-def update():
+@token_required
+def update(user_data: User):
     data = request.get_json()
-    number_of_hits = match_char(data['currentText'],data['myText'])
-    time = math.floor((data['timeEnd'] - data['timeStart'])/1000)
+    game_id = data['game_id']
+    user_id = user_data.id
+    line = data['line']
+    if data['currentText']:
+        number_of_hits = sum( [1 for x,y in zip(data['currentText'],data['myText']) if x==y] )
+        number_of_miss = len(data['currentText']) - number_of_hits        
+    else:
+        number_of_hits = 0
+        number_of_miss = 0
+    time = data['time']
+    
+    res:Game_Details = Game_Dao.add_shot(game_id,user_id,line,number_of_hits,number_of_miss,time)
+    
     return jsonify({
-        'time': time
+        'line': res.line+1
         })

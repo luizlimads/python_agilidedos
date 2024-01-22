@@ -6,14 +6,6 @@ body{
     min-height: 200px;
 }
 
-.char-erro{
-    color: red;
-}
-
-.char-sucess{
-    color: green;
-}
-
 .largura-100{
     width: 100vw;
 }
